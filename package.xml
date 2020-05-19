@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <package>
-  <name>mcr_rosbag_recorder</name>
+  <name>rosbag_recorder</name>
   <version>0.1.0</version>
   <description>
       Node to record bag files
   </description>
 
-  <author email="santosh.thoduka@smail.inf.h-brs.de">Santosh Thoduka</author>
-  <maintainer email="santosh.thoduka@smail.inf.h-brs.de">Santosh Thoduka</maintainer>
+  <author email="santosh.thoduka@gmail.com">Santosh Thoduka</author>
+  <maintainer email="santosh.thoduka@gmail.com">Santosh Thoduka</maintainer>
 
   <license>GPLv3</license>
 
