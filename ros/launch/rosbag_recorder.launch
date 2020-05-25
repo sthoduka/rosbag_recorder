@@ -15,5 +15,6 @@
     <param name="rosbag_arguments" type="str" value="--lz4" />
     <remap from="~event_in" to="/rosbag_recorder/event_in" />
     <remap from="~event_out" to="/rosbag_recorder/event_out" />
+    <remap from="~filename" to="/rosbag_recorder/filename" />
   </node>
 </launch>

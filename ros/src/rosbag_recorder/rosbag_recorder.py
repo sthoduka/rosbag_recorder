@@ -35,6 +35,7 @@ class RosbagRecorder(object):
 
         # Publishers
         self.event_out = rospy.Publisher("~event_out", std_msgs.msg.String, queue_size=1)
+        self.filename_pub = rospy.Publisher("~filename", std_msgs.msg.String, queue_size=1)
 
         # Subscribers
         rospy.Subscriber("~event_in", std_msgs.msg.String, self.event_in_cb)
@@ -102,9 +103,10 @@ class RosbagRecorder(object):
         :rtype: str
 
         """
-        success = self.start_recording()
+        success, filename = self.start_recording()
         self.event = None
         if success:
+            self.filename_pub.publish(filename)
             self.event_out.publish("e_started")
             return 'IDLE'
         else:
@@ -135,7 +137,7 @@ class RosbagRecorder(object):
         # if the file already exists, we don't start recording
         if os.path.exists(fullpath):
             rospy.logerr("File %s already exists. Not recording" % fullpath)
-            return False
+            return False, ''
 
         rosbag_run_string = 'rosbag record '
         if self.rosbag_arguments is not None:
@@ -148,12 +150,12 @@ class RosbagRecorder(object):
         start_time = rospy.Time.now()
         while rospy.Time.now() - start_time < self.timeout:
             if os.path.exists(fullpath + '.active'):
-                return True
+                return True, filename
             rospy.sleep(0.1)
 
         rospy.logerr("Timed out waiting for recording to start.")
         self.stop_recording()
-        return False
+        return False, ''
 
     def stop_recording(self):
         if self.rosbag_process:

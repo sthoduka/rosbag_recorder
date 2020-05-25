@@ -12,6 +12,7 @@ This package contains a ROS node which starts and stops a `rosbag record` proces
 3. Launch the node; for example `roslaunch rosbag_recorder rosbag_recorder.launch`.
 4. When you want to start recording, publish a `std_msgs/String` message with the data `e_start` on the topic `/rosbag_recorder/event_in`; for example `rostopic pub -1 /rosbag_recorder/event_in std_msgs/String e_start`
 5. Listen to the topic `/rosbag_recorder/event_out` for a `std_msgs/String` message. If you receive `e_started`, this means the recording started successfully, and if you receive `e_failed`, it means the recording did not start.
+6. Listen to the topic `/rosbag_recorder/filename` for the filename of the recorded rosbag file
 
 ## Notes
 * multiple instances can be started, but make sure to change the topic remappings and prefix in the launch file as required
